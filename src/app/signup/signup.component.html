@@ -1,0 +1,68 @@
+<section id="signup">
+     <div class="container">
+        <form [formGroup]="signUp" (ngSubmit)="signUp.valid&&FormData()" >
+            <div class="form w-50 m-auto">
+                <div class="row my-3">
+                    <div class="col-md-6">
+                        <input [class.is-valid]="signUp.controls.name.status=='VALID'" formControlName="name"
+                         type="text" placeholder="Enter Your Name" class="form-control">
+                        <div *ngIf="signUp.controls.name.errors &&signUp.controls.name.touched  " class="alert alert-danger" role="alert">
+                             Name is required
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <select  [class.is-valid]="signUp.controls.city.status=='VALID'"  formControlName="city" class="form-control">
+                        <option value="" disabled>Enter Your city</option>
+                        <option *ngFor="let item of data" value="{{item.name}}">{{item.name}}</option>
+                      </select>
+                      <div *ngIf="signUp.controls.city.errors &&signUp.controls.city.touched  " class="alert alert-danger" role="alert">
+                           city is required
+                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+
+                    <select  [class.is-valid]="signUp.controls.relationship.status=='VALID'" formControlName="relationship"
+                     class="form-control">
+                      <option value="" disabled>Enter Your relationship</option>
+                      <option *ngFor="let item of data2" value="{{item.name}}">{{item.name}}</option>
+                    </select>
+                    <div *ngIf="signUp.controls.relationship.errors &&signUp.controls.relationship.touched  " class="alert alert-danger" role="alert">
+                         relationship is required
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <input [class.is-valid]="signUp.controls.phone.status=='VALID'" formControlName="phone" type="text"
+                     placeholder="Enter Your phone" class="form-control">
+
+                    <div *ngIf="signUp.controls.phone.errors &&signUp.controls.phone.touched  " class="alert alert-danger" role="alert">
+                         phone is required
+                    </div>
+                  </div>
+                </div><br>
+
+                <input [class.is-valid]="signUp.controls.email.status=='VALID'" formControlName="email"
+                type="email" placeholder="Enter Email" class="form-control ">
+                <div *ngIf="signUp.controls.email.errors &&signUp.controls.email.touched  " class="alert alert-danger" role="alert">
+                    Email is required
+                </div><br>
+
+                <input [class.is-valid]="signUp.controls.password.status=='VALID'" formControlName="password"
+                type="password" placeholder="Enter password" class="form-control ">
+                <div *ngIf="signUp.controls.password.errors &&signUp.controls.password.touched  " class="alert alert-danger" role="alert">
+                    Password is required
+                </div><small class="" style="color: rgb(15, 8, 8);">must include lower and uper case character and symbol</small>
+                <!-- <button type="submit" class="btn btn-info w-100">Sign Up</button> -->
+                <button [disabled]="signUp.invalid" [ngStyle]="signUp.invalid? isStyleValid:isStyleInvalid"
+                class="btn btn-info w-100 my-3"><span *ngIf="!isClicked">Sign Up</span> <span *ngIf="isClicked">Wating....</span></button>
+               <div *ngIf="isSuccess" class="alert alert-success text-center" role="alert">
+                    {{ResponseMessage}}
+                </div>
+                <div *ngIf="isUniuqeEmail" class="alert alert-danger text-center" role="alert">
+                    {{isUniuqeEmailMessage}}
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
